@@ -4,16 +4,13 @@ import "fmt"
 
 func main() {
 	//array
+	nama := [...]string{"Dimas", "Adi", "Suyikno", "Ahmad", "Aulia", "Wahib"}
 
-	var mobil [3]string
+	// catatan khusus range selalu return dua variabel, jadi jika ingin hanya satu yang diisi
+	// harus mengganti salah satunya dengan "_"
+	for index, value := range nama {
+		// printf digunakan untuk menceak %d dan %s misalkan
+		fmt.Printf("index ke- %d dan isinya adalah %s\n", index, value)
+	}
 
-	mobil[0] = "Honda"
-	mobil[1] = "BMW"
-	mobil[2] = "Nissan"
-
-	angka := [...]int{1, 4, 51, 6}
-
-	angka[2] = 8
-	fmt.Println(mobil)
-	fmt.Println(angka)
 }
