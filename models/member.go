@@ -12,3 +12,9 @@ type Member struct {
 func (M Member) GetInfo() {
 	fmt.Println("halo nama saya adalah")
 }
+
+//ChangeName merubah nama
+func (M *Member) ChangeName(Name string, UmurBerubah int) {
+	M.Nama = Name
+	M.Umur = UmurBerubah
+}
