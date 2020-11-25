@@ -54,3 +54,29 @@ func SelectionShort(angka []int) []int {
 	}
 	return angka
 }
+
+//ShellShort shor merupakan salah satu type sort algorithm
+func ShellShort(angka []int) []int {
+	interval := 0
+
+	for interval < len(angka)/3 {
+		interval = interval*3 + 1
+	}
+
+	for interval > 0 {
+
+		for outer := interval; outer < len(angka); outer++ {
+			ValueToInsert := angka[outer]
+			inner := outer
+			for inner > interval-1 && angka[inner-interval] >= ValueToInsert {
+				angka[inner] = angka[inner-interval]
+				inner = inner - interval
+
+			}
+			angka[inner] = ValueToInsert
+		}
+		interval = (interval - 1) / 3
+
+	}
+	return angka
+}
