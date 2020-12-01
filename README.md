@@ -37,7 +37,7 @@ func main in golang only can use in one file so remember
  -struct
  -import local file
  -using method
- -interface
+ -interface adlah sekumpulan method kosong yang ntninya digunakan untuk mempermudah dalam pemanggilannya biasanya dipasangkan dengan struct
 
 Hari 3
 day off karena listrik mati dan semangat hilang
@@ -57,4 +57,13 @@ Hari 1
 -struct boleh diisi salah satunya tapi tidak akan bisa dicetak keduanya secara bersamaan, embed struct digunakan untuk membedakan dan mempermudah struct, jika embed struct memiliki kesamaan variabel antara parent dan childnya maka untuk pemanggilan harus lebih spesifik yaitu dengan menambahkan nama parentya terlebih dahulu, unttuk menggunsksn slice atau array cukup menambahkan [] pada saat deklarasinya, jika dia bertipe data var maka nilainya harus disimpan terlebih dahulu baru bisa ditamplkan
 
 -perbedaan method dan func adalah cara deklarasinya, yaitu di sela2 func dan nama functionya
+
+-untuk memanggil private properti pada file lain harus masukkan kedalam fungsi public jika tidak pasti akan terjadi error, atau membuatnya menjadi public yaitu mengawali namanya menjadi huruf besar
+
+CATATAN PENTING
+-jika ada beberapa file di folder main dan ingin memasukkan isinya ke main, bisa langsung di pakai akan tetapi jika ingin menjalankan harus menjalankan kedua filenya contoh go run main.go antoher.go
+
+-init() adalah fungsi khusus dimana fungsi ini akan dijalankan terlebih dahulu bahkan lebih dulu dari main()
+
+-Goroutine adalah sebuah fitur pada golang, dimana fitur ini berfungsi untuk membuat proses menjadi lebih baik atau menjadi lebih cepat sehingga tidak berjalan bersamaan, misal ada dua varibale yang dicetak dan salah satunya menggunakan Goroutine maka keduanya tidak akan berjalan bersamaan, untuk menggunakan Goroutine pertama harus masukkan package runtime dan menggunakan 'go' sebelum method yang dipanggil
 
