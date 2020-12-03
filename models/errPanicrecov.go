@@ -2,6 +2,7 @@ package models
 
 import (
 	"errors"
+	"fmt"
 	"strings"
 )
 
@@ -13,4 +14,13 @@ func Validate(input string) (bool, error) {
 	}
 
 	return true, nil
+}
+
+//Catach berfungsi untuk mengetahui apakah ada error atau tidak
+func Catach() {
+	if r := recover(); r != nil {
+		fmt.Println("ada error ", r)
+	} else {
+		fmt.Println("apps berjalan dengan lancar")
+	}
 }

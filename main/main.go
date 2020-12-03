@@ -5,8 +5,6 @@ import (
 	"math/rand"
 	"runtime"
 	"time"
-
-	"github.com/Go-learn/models"
 )
 
 // untuk membuat package menjadi selevel harus di kasih '.' sebelum ""
@@ -29,6 +27,22 @@ type murid struct {
 	nilai    int
 	kelas    int
 	Predikat string
+}
+
+type muridLengkap struct {
+	name        string
+	height      float64
+	age         int32
+	isGraduated bool
+	hobbies     []string
+}
+
+var data = muridLengkap{
+	name:        "Dimas",
+	height:      180.5,
+	age:         24,
+	isGraduated: true,
+	hobbies:     []string{"Basketball", "Programming", "Gamming"},
 }
 
 var angka = []int{4, 9, 14, 2, 6, 1}
@@ -194,15 +208,91 @@ func main() {
 			fmt.Println(input, "isn't number")
 			fmt.Println(err.Error())
 		}*/
+	/*
+		defer models.Catach()
+		var input string
+		fmt.Print("masukkan namamu : ")
+		fmt.Scanln(&input)
 
-	var input string
-	fmt.Print("masukkan namamu : ")
-	fmt.Scanln(&input)
+		if valid, err := models.Validate(input); valid {
+			fmt.Println("Hallo : ", input)
+		} else {
+			panic(err.Error())
+			fmt.Println("end")
+		}
+	*/
 
-	if valid, err := models.Validate(input); valid {
-		fmt.Println("Hallo : ", input)
-	} else {
-		fmt.Println(err.Error())
-	}
+	/*
+		//penggunan recover IIFE
+		defer func() {
+			if r := recover(); r != nil {
+				fmt.Println("terjadi error", r)
+			} else {
+				fmt.Println("aplikasi berjalan lancar")
+			}
+		}()
 
+		panic("some error happen")
+	*/
+
+	/*
+		list := []string{"Dimas", "Adi", "Suyikno", "Imam", "Abdul"}
+
+		for _, each := range list {
+			func() {
+				defer func() {
+					if r := recover(); r != nil {
+						fmt.Println("Panic occured on looping", each, "| message:", r)
+					} else {
+						fmt.Println("Application running perfectly")
+					}
+				}()
+				panic("some error happen")
+			}()
+
+		}
+	*/
+
+	//mencetak macam - macam tipe data
+	//penggunaan printf untuk menggunakannya
+	//%b digunakan untuk mencetak biner dari data numeriknya : 01001
+	fmt.Printf("Halo umur Saya : %b\n", data.age)
+	//%c kode unicode di format menjadi data numerik contoh = 1400 -> n
+	fmt.Printf("%c\n", 1400)
+	//%d digunakan untuk memformat data numerik menjadi string numerik berbasis 10
+	fmt.Printf("%d\n", data.age)
+	//%e dan %E digunakan untuk memformat data numerik desimal menjadi bentuk numerik standard scientific notation atau yang 1.825000E+02
+	fmt.Printf("%e\n", data.height)
+	fmt.Printf("%E\n", data.height)
+	//%f dan %f figunakan untuk memformat data numerik desimal, dengan lebar desimalnya bisa diatur
+	fmt.Printf("%.f\n", data.height)  //bulat atau tidak ditampilkan bilangan decimalya
+	fmt.Printf("%2.f\n", data.height) //menampilkan dua bilangan dibelakang ,
+	fmt.Printf("%f\n", data.height)   //menampilkan bilangan decimal 6 digit
+	fmt.Printf("%.9f\n", data.height) //menampilkan bilngan decimal 9 digit
+	//%g atau %G sama seperti %f akan tetapi memliki lebar desimal yang lebih luas dan memiliki perbedaan lain yaitu lebar dari nilainya tidak bisa di custom
+	fmt.Printf("%g\n", data.height)
+	//%o merubah data numerik menjadi string numerik berbasis 8 (oktal) / bit
+	fmt.Printf("%o\n", data.age)
+	//%p menncetak pointer dari variabelnya, berbasis 16 dengan prefix 0x., ingat selalu menggunakan & sebelum nama variabel untuk pointer
+	fmt.Printf("%p\n", &data.name)
+	//%q digunakan untuk esacpe string, meskipun string dipakai menggugnakan literal '\' akan tetap di escape
+	fmt.Printf("%q\n", `" name \ height "`)
+	//%s digunakan untuk memformat data string
+	fmt.Printf("%s\n", data.name)
+	//%t digunakan untuk memformat data boolean, ditampilkan nilainya
+	fmt.Printf("%t\n", data.isGraduated)
+	//%T mengambil tipe variable yang akan diformat
+	fmt.Printf("%T\n", data.name)
+	fmt.Printf("%T\n", data.height)
+	fmt.Printf("%T\n", data.age)
+	fmt.Printf("%T\n", data.isGraduated)
+	fmt.Printf("%T\n", data.hobbies)
+	//%v digunakan untuk memformat semua tipe data bahkan inteface{}, jika struct yang dicetak maka akan menampilkan semuanya
+	fmt.Printf("%v\n", data)
+	//%+v digunakan untuk memformat struct, dan ditampilkan semuanya secara berurutan termasuk elemnya
+	//khusus anonymous struct, maka akan muncul struktur anonymousnya yaitu strcut{isinya}
+	fmt.Printf("%+v\n", data)
+	//%x dan %X digunakan untuk memformat data numerik menjadi bentuk string numerik berbasis 16 atau hexadecimal
+	fmt.Printf("%x\n", data.age)
+	//%% untuk memformat % akan muncul pada saat di jalankan
 }
