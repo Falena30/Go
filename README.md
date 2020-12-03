@@ -57,6 +57,7 @@ Hari 1
 -struct boleh diisi salah satunya tapi tidak akan bisa dicetak keduanya secara bersamaan, embed struct digunakan untuk membedakan dan mempermudah struct, jika embed struct memiliki kesamaan variabel antara parent dan childnya maka untuk pemanggilan harus lebih spesifik yaitu dengan menambahkan nama parentya terlebih dahulu, unttuk menggunsksn slice atau array cukup menambahkan [] pada saat deklarasinya, jika dia bertipe data var maka nilainya harus disimpan terlebih dahulu baru bisa ditamplkan
 
 -perbedaan method dan func adalah cara deklarasinya, yaitu di sela2 func dan nama functionya
+-func closure adalah sebuah fungsi yang dapat dimasukkan kedalam variabel
 
 -untuk memanggil private properti pada file lain harus masukkan kedalam fungsi public jika tidak pasti akan terjadi error, atau membuatnya menjadi public yaitu mengawali namanya menjadi huruf besar
 
@@ -66,4 +67,15 @@ CATATAN PENTING
 -init() adalah fungsi khusus dimana fungsi ini akan dijalankan terlebih dahulu bahkan lebih dulu dari main()
 
 -Goroutine adalah sebuah fitur pada golang, dimana fitur ini berfungsi untuk membuat proses menjadi lebih baik atau menjadi lebih cepat sehingga tidak berjalan bersamaan, misal ada dua varibale yang dicetak dan salah satunya menggunakan Goroutine maka keduanya tidak akan berjalan bersamaan, untuk menggunakan Goroutine pertama harus masukkan package runtime dan menggunakan 'go' sebelum method yang dipanggil
+
+-channel adalah penerapan analogi penyerahan ke tipe data
+-buffer channel sedikit berbeda dari channel biasa karena, buffer channel akan memiliki sebuah penampung dan selama penampung itu masih ada bisa di terukan
+-channel direction dibagi menjadi 3 yaitu 
+    1. nama paramater channel tipe data (yang ini bisa mengirim dan menerima data)
+    2. nama parameter channel <- tipe data (yang ini hanya bisa untuk mengirim data)
+    3. nama parameter <- channel tipe data (yang ini hanya bisa untuk menerima data)
+-channel timeout dapat digunakan untuk memberikan server timeout pada website jika tidak ada aktifitas
+
+-defer adalah sebuh fitur dalam go dimana akan dieksekusi di akhir
+-Exit adalah sebuah paket yang akan menghentikan sebuah program secara paksa dan berada paket os, dan pemganggilan adalah os.Exit(nilai paramet)
 

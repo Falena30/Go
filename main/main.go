@@ -2,7 +2,11 @@ package main
 
 import (
 	"fmt"
+	"math/rand"
 	"runtime"
+	"time"
+
+	"github.com/Go-learn/models"
 )
 
 // untuk membuat package menjadi selevel harus di kasih '.' sebelum ""
@@ -69,6 +73,7 @@ func main() {
 		s1.GetProperyInfo()
 	*/
 
+	rand.Seed(time.Now().Unix())
 	//pada saat dirunning menggunakan 2 proses
 	runtime.GOMAXPROCS(2)
 
@@ -76,7 +81,7 @@ func main() {
 	//var massage = make(chan string)
 
 	//membuat buffer channel dan dimasukkan kedalam variable
-	massage := make(chan int, 2)
+	//massage := make(chan int, 2)
 
 	/*
 		//membaut closure yang dimasukkan ke varibale hello
@@ -103,17 +108,19 @@ func main() {
 		fmt.Println(m3)
 	*/
 
-	go func() {
-		for {
-			i := <-massage
-			fmt.Println("recive data", i)
-		}
-	}()
+	/*
+		go func() {
+			for {
+				i := <-massage
+				fmt.Println("recive data", i)
+			}
+		}()
 
-	for i := 0; i < 5; i++ {
-		fmt.Println("send data", i)
-		massage <- i
-	}
+		for i := 0; i < 5; i++ {
+			fmt.Println("send data", i)
+			massage <- i
+		}
+	*/
 
 	/*
 		for _, each := range []string{"Dimas", "Wahib", "Imam"} {
@@ -129,5 +136,73 @@ func main() {
 			models.PrintMassage(massage)
 		}
 	*/
+
+	//channel select
+	/*
+		var angka = []int{1, 3, 5, 6, 1, 7, 0, 12, 4, 56, 7}
+		fmt.Println("angka : ", angka)
+
+		var ch1 = make(chan float64)
+		go models.GetAverage(angka, ch1)
+
+		var ch2 = make(chan int)
+		go models.GetMax(angka, ch2)
+
+		for i := 0; i < 2; i++ {
+			select {
+			case avg := <-ch1:
+				fmt.Printf("avg \t : %.2f \n", avg)
+			case max := <-ch2:
+				fmt.Printf("max \t : %d \n", max)
+			}
+		}
+	*/
+
+	//channel untuk range and close
+	/*
+		var massage = make(chan string)
+		go models.SendMassage(massage)
+		models.CetakPesan(massage)
+	*/
+
+	/*
+		//channel untuk interval
+		var massage = make(chan int)
+		go models.SendData(massage)
+		models.RetriveData(massage)
+	*/
+
+	//defer dan exit
+	/*
+		models.OrderMenu("Pizza")
+		models.OrderMenu("Burger")
+	*/
+
+	//error default
+	/*
+		var input string
+		fmt.Print("masukkan angaka : ")
+		fmt.Scanln(&input)
+
+		var number int
+		var err error
+		number, err = strconv.Atoi(input)
+
+		if err == nil {
+			fmt.Println(number, "is number")
+		} else {
+			fmt.Println(input, "isn't number")
+			fmt.Println(err.Error())
+		}*/
+
+	var input string
+	fmt.Print("masukkan namamu : ")
+	fmt.Scanln(&input)
+
+	if valid, err := models.Validate(input); valid {
+		fmt.Println("Hallo : ", input)
+	} else {
+		fmt.Println(err.Error())
+	}
 
 }
