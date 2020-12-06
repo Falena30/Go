@@ -1,9 +1,7 @@
 package main
 
 import (
-	"fmt"
 	"math/rand"
-	"regexp"
 	"runtime"
 	"time"
 )
@@ -561,50 +559,146 @@ func main() {
 		var sToUpper = strings.ToUpper(nama)
 		fmt.Println(sToUpper)
 	*/
-	//Regex
-	//findallstring(), digunakan untuk membuat satu kalimat menjadi pecahan slice perkata
-	var txt = "kucing kucang kucucung"
-	//compile seluruh huruf a-z dan dimasukkan ke regex
-	//jika ada huruf besar maka tidak akan muncul hurufnya dari hasil regexnya
-	var regex, err = regexp.Compile(`[a-z]+`)
-	if err != nil {
-		fmt.Println(err.Error())
-	}
-	var res1 = regex.FindAllString(txt, 2)
-	fmt.Println(res1)
-
-	var res2 = regex.FindAllString(txt, -1)
-	fmt.Println(res2)
-	var isMatch = regex.MatchString(txt)
-	fmt.Println(isMatch)
-	//findstring(), digunakan untuk menemukan string yang dicari, jika terdapat kesamaan maka yang awal saja yang digunakan
-	var fFind = regex.FindString(txt)
-	//kucing karena kata pertama
-	fmt.Println(fFind)
-	//finstringindex(), digunakan untuk mencari index dari string yang dicari dari regex
-	var sFind = regex.FindStringIndex(txt)
-	//akan mencetak [0;6] artinya index dari 0 ke 6 yaitu kucing
-	fmt.Println(sFind)
-	var str = txt[0:6]
-	fmt.Println(str)
-	//findallstring, method ini digunakan untuk mencari semua string yang cocok dengan regex
-	var aFind = regex.FindAllString(txt, -1)
-	fmt.Println(aFind)
-	//replace all string, merubah semua string
-	var aReplace = regex.ReplaceAllString(txt, "kuceng")
-	fmt.Println(aReplace)
-	//replaceallstringfunc, merubah semua string tetapi dapat memiliki kondisinya sendiri
-	var rRepalce = regex.ReplaceAllStringFunc(txt, func(each string) string {
-		if each == "kucing" {
-			return "kuceng"
+	/*
+		//Regex
+		//findallstring(), digunakan untuk membuat satu kalimat menjadi pecahan slice perkata
+		var txt = "kucing kucang kucucung"
+		//compile seluruh huruf a-z dan dimasukkan ke regex
+		//jika ada huruf besar maka tidak akan muncul hurufnya dari hasil regexnya
+		var regex, err = regexp.Compile(`[a-z]+`)
+		if err != nil {
+			fmt.Println(err.Error())
 		}
-		return each
-	})
+		var res1 = regex.FindAllString(txt, 2)
+		fmt.Println(res1)
 
-	fmt.Println(rRepalce)
-	//split, digunakan untuk memisahkan
-	var rRegex, _ = regexp.Compile(`[c-k]+`) //yang dicari adalah c-k sebagai pemisah
-	var aSplit = rRegex.Split(txt, -1)
-	fmt.Printf("%#v\n", aSplit)
+		var res2 = regex.FindAllString(txt, -1)
+		fmt.Println(res2)
+		var isMatch = regex.MatchString(txt)
+		fmt.Println(isMatch)
+		//findstring(), digunakan untuk menemukan string yang dicari, jika terdapat kesamaan maka yang awal saja yang digunakan
+		var fFind = regex.FindString(txt)
+		//kucing karena kata pertama
+		fmt.Println(fFind)
+		//finstringindex(), digunakan untuk mencari index dari string yang dicari dari regex
+		var sFind = regex.FindStringIndex(txt)
+		//akan mencetak [0;6] artinya index dari 0 ke 6 yaitu kucing
+		fmt.Println(sFind)
+		var str = txt[0:6]
+		fmt.Println(str)
+		//findallstring, method ini digunakan untuk mencari semua string yang cocok dengan regex
+		var aFind = regex.FindAllString(txt, -1)
+		fmt.Println(aFind)
+		//replace all string, merubah semua string
+		var aReplace = regex.ReplaceAllString(txt, "kuceng")
+		fmt.Println(aReplace)
+		//replaceallstringfunc, merubah semua string tetapi dapat memiliki kondisinya sendiri
+		var rRepalce = regex.ReplaceAllStringFunc(txt, func(each string) string {
+			if each == "kucing" {
+				return "kuceng"
+			}
+			return each
+		})
 
+		fmt.Println(rRepalce)
+		//split, digunakan untuk memisahkan
+		var rRegex, _ = regexp.Compile(`[c-k]+`) //yang dicari adalah c-k sebagai pemisah
+		var aSplit = rRegex.Split(txt, -1)
+		fmt.Printf("%#v\n", aSplit)
+	*/
+	//Encoding & Decoding
+
+	/*
+		//EncodingToString
+		var nNama = "Dimas Adi"
+		//merubah string mejadi bentuk encodenya
+		var aEncodiToString = base64.StdEncoding.EncodeToString([]byte(nNama))
+		fmt.Println("Encode : ", aEncodiToString)
+		//Merubah encoding menjadi string
+		var aDecodeToString, _ = base64.StdEncoding.DecodeString(aEncodiToString)
+		var decodeString = string(aDecodeToString)
+		fmt.Println(decodeString)
+	*/
+	/*
+		//mengambil panjang dari variabel nama
+		var aEncode = make([]byte, base64.StdEncoding.EncodedLen(len(nNama)))
+		base64.StdEncoding.Encode(aEncode, []byte(nNama))
+		var aEncodeString = string(aEncode)
+		fmt.Println(aEncodeString)
+
+		//mengambil panjang dari encode aEncode
+		var bDecode = make([]byte, base64.StdEncoding.DecodedLen(len(aEncode)))
+		//untuk melihat apakah ada error atau tidak
+		var _, err = base64.StdEncoding.Decode(bDecode, aEncode)
+		if err != nil {
+			fmt.Println(err.Error())
+		}
+		var cDecodeString = string(bDecode)
+		fmt.Println(cDecodeString)
+
+		var nURL = "http://jomblo.com/"
+		var uEncode = make([]byte, base64.URLEncoding.EncodedLen(len(nURL)))
+		base64.URLEncoding.Encode(uEncode, []byte(nURL))
+		var fEncode = string(uEncode)
+		fmt.Println("URL Encode dari", nURL, " : ", fEncode)
+		var uDecode = make([]byte, base64.URLEncoding.DecodedLen(len(uEncode)))
+		var _, err2 = base64.URLEncoding.Decode(uDecode, uEncode)
+		if err2 != nil {
+			fmt.Println(err.Error())
+		}
+		var uDecodeToString = string(uDecode)
+		fmt.Println("Hasil Decod dari ", fEncode, " : ", uDecodeToString)
+	*/
+	//Hash Sha1
+	/*
+		//digunakan untuk merubah text menjadi karakter acak
+		var nName = "Rahasia Dimas"
+		//sha1.New() merupakan method yang mengubah variabel menjadi Hash
+		var sha = sha1.New()
+		//sha disini memiliki dua buah method yaitu write dan sum, untuk write bisa diisi dengan kalimta yang ingin dirubah
+		//sedangkan untuk Sum bisa diberi nilai NIl
+		//wrtite merupakan fungsi yang memberikan kode acak
+		sha.Write([]byte(nName))
+		var nEncrypt = sha.Sum(nil)
+		var nEncryptString = fmt.Sprintf("%x\n", nEncrypt)
+		fmt.Println(nEncryptString)
+
+		fmt.Printf("Text sebelumnya : %s\n", nName)
+
+		var hash1, salt1 = models.DoHashUsingSalt(nName)
+		fmt.Printf("hash 1 : %s\n\n", hash1)
+
+		var hash2, salt2 = models.DoHashUsingSalt(nName)
+		fmt.Printf("hash 2 : %s\n\n", hash2)
+
+		var hash3, salt3 = models.DoHashUsingSalt(nName)
+		fmt.Printf("hash 3 : %s\n\n", hash3)
+
+		_, _, _ = salt1, salt2, salt3
+	*/
+	//Argumen pemanggilan sama seperti biasa akan tetapi ditambah dengan masukkan lain
+	/*
+		var argsw = os.Args
+		fmt.Printf("-> %#v\n", argsw)
+		var argsw2 = argsw[1:]
+		fmt.Printf("-> %#v\n", argsw2)
+	*/
+	//Flag
+	//nName memiliki nilai string, key : name, default : anonymous , dan keterangan : type your name
+	/*
+		var nNama = flag.String("Name", "anonymous", "type your name")
+		var nAge = flag.Int64("Age", 24, "Type your Age")
+		flag.Parse()
+		fmt.Printf("Name\t : %s\n", *nNama)
+		fmt.Printf("Age\t : %d\n", *nAge)
+	*/
+	/*
+		var output1, _ = exec.Command("dir").Output()
+		fmt.Printf("-> ls\n%s\n", string(output1))
+	*/
+	// ayo membuat file baru lewat Go
+	//models.CreateFile()
+	//models.WriteFile()
+	//models.ReadFile()
+	//models.RemoveFile()
 }
