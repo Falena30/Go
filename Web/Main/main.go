@@ -1,8 +1,10 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
+	"net/http"
+
+	"github.com/Go-learn/Web/Main/serve"
 )
 
 //ini adalah path untk lokasi folder yang berbeda terlalu panjang, tapi bagaimana lagi
@@ -68,59 +70,67 @@ func main() {
 	//JSON
 	//Penggunaan JSON
 	//deklarasi JSON, ada diatas
-	var JSONString = `{
-		"Name" : "Dimas Adi", 
-		"Age" : 24
-	}`
+	/*
+			var JSONString = `{
+				"Name" : "Dimas Adi",
+				"Age" : 24
+			}`
 
-	var JSONData = []byte(JSONString)
+			var JSONData = []byte(JSONString)
 
-	var data user
-	//fungsi Unmarshal hayna bisa menerima data berbentu byte, dan pointer
-	var err = json.Unmarshal(JSONData, &data)
-	if err != nil {
-		fmt.Printf(err.Error())
-		return
-	}
-	fmt.Println("user : ", data.FullName)
-	fmt.Println("age  : ", data.Age)
+			var data user
+			//fungsi Unmarshal hayna bisa menerima data berbentu byte, dan pointer
+			var err = json.Unmarshal(JSONData, &data)
+			if err != nil {
+				fmt.Printf(err.Error())
+				return
+			}
+			fmt.Println("user : ", data.FullName)
+			fmt.Println("age  : ", data.Age)
 
-	var data1 map[string]interface{}
-	//ingat salah satu parameter unmarshal ada pointer
-	json.Unmarshal(JSONData, &data1)
+			var data1 map[string]interface{}
+			//ingat salah satu parameter unmarshal ada pointer
+			json.Unmarshal(JSONData, &data1)
 
-	var data2 interface{}
-	json.Unmarshal(JSONData, &data2)
-	var decodeData2 = data2.(map[string]interface{})
-	fmt.Println("user dengan interfce{}: ", decodeData2["Name"])
-	fmt.Println("age dengan interfce{}: ", decodeData2["Age"])
+			var data2 interface{}
+			json.Unmarshal(JSONData, &data2)
+			var decodeData2 = data2.(map[string]interface{})
+			fmt.Println("user dengan interfce{}: ", decodeData2["Name"])
+			fmt.Println("age dengan interfce{}: ", decodeData2["Age"])
 
-	var ajsonString = `[
-		{"Name": "john wick", "Age": 27},
-    	{"Name": "ethan hunt", "Age": 32}
-	]`
+			var ajsonString = `[
+				{"Name": "john wick", "Age": 27},
+		    	{"Name": "ethan hunt", "Age": 32}
+			]`
 
-	var aData []user
+			var aData []user
 
-	var aErr = json.Unmarshal([]byte(ajsonString), &aData)
-	if aErr != nil {
-		fmt.Println(aErr.Error())
-		return
-	}
+			var aErr = json.Unmarshal([]byte(ajsonString), &aData)
+			if aErr != nil {
+				fmt.Println(aErr.Error())
+				return
+			}
 
-	fmt.Println("user 1:", aData[0].FullName)
-	fmt.Println("user 2:", aData[1].FullName)
+			fmt.Println("user 1:", aData[0].FullName)
+			fmt.Println("user 2:", aData[1].FullName)
 
-	//Encode ke JSON
-	var objectEncode = []user{{"john wick", 27}, {"ethan hunt", 32}}
+			//Encode ke JSON
+			var objectEncode = []user{{"john wick", 27}, {"ethan hunt", 32}}
 
-	//marshal memiliki satu parameter
-	var dJson, dErr = json.Marshal(objectEncode)
+			//marshal memiliki satu parameter
+			var dJson, dErr = json.Marshal(objectEncode)
 
-	if dErr != nil {
-		fmt.Println(dErr.Error())
-		return
-	}
-	var decodeString = string(dJson)
-	fmt.Println(decodeString)
+			if dErr != nil {
+				fmt.Println(dErr.Error())
+				return
+			}
+			var decodeString = string(dJson)
+			fmt.Println(decodeString)
+	*/
+
+	http.HandleFunc("/user", serve.User)
+	http.HandleFunc("/users", serve.Users)
+	fmt.Println("starting web server at http://localhost:8080/")
+	http.ListenAndServe(":8080", nil)
+
 }
